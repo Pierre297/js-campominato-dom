@@ -17,6 +17,7 @@ const gamemModeEasy = document.getElementById("easy-btn");
 const gamemModeMedium = document.getElementById("medium-btn");
 const gamemModeHard = document.getElementById("hard-btn");
 const clickBox = document.getElementsByClassName("square-easy");
+const gameOver = document.getElementById("game-over")
 let gamemode;
 
 
@@ -71,6 +72,7 @@ function genGrid(){
                 let id = parseInt(node.id);
                 if(bombList.includes(id)){
                     node.classList.add("clicked-bomb");
+                    gameOver.innerHTML = '<h2>GAME OVER</h2> <p>Try again</p>'
                     console.log('hai perso');
                 }
                 

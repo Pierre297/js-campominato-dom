@@ -87,3 +87,14 @@ header h4 {
 .square.clicked-true span {
   display: block;
 }
+
+footer {
+  text-align: center;
+  font-size: 30px;
+}
+
+footer h2 {
+  text-align: center;
+  color: red;
+  font-size: 30px;
+}
