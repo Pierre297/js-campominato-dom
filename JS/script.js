@@ -19,7 +19,6 @@ const gamemModeHard = document.getElementById("hard-btn");
 const clickBox = document.getElementsByClassName("square-easy");
 let gamemode;
 
-// -------------------------------------------------------------------------------------------------------------------------------------------
 
 // bottone gamemode easy
 gamemModeEasy.addEventListener('click', function() {
@@ -58,10 +57,33 @@ gamemModeHard.addEventListener('click', function() {
 
 // funzione creazione griglia
 function genGrid(){
+
+    for(let i = 1; i <= gamemode; i++){
+        let node = document.createElement("div");
+        node.classList.add(squareClass);
+        // newElement.setAttribute("id", i);
+        
+               
+         node.addEventListener('click',
+            function(){
+                node.innerText = i;
+                node.classList.add("clicked-true");
+                // let id = newElement.id;
+                // if(bombList.includes(id)){
+                // console.log('hai perso');
+                // }
+                
+            }
+        )
+            gridContainer.appendChild(node);
+    }
+
+
+    // il computer deve generare 16 caselle casuali all'interno della griglia che rappresenteranno le bombe
     // -generazione bombe-----------------------------------------------------------------------------------------------------------------------------------
     const bombList = [];
 
-    while (bombList.length <= 16) {
+    while (bombList.length < 16) {
     const num = Math.floor(Math.random() * gamemode) + 1;
 
     let duplicateNum = true;
@@ -73,85 +95,17 @@ function genGrid(){
     }
     if (duplicateNum == true){
         bombList.push(num);
-    }
-}
+       }
 
+    }
 
     console.log(bombList);
-    console.log("la lista delle bombe è: " + bombList);
-
     // -fine generazione bombe-----------------------------------------------------------------------------------------------------------------------------------
-    for(let i = 1; i <= gamemode; i++){
-        let node = document.createElement("div");
-        node.classList.add(squareClass);
-        
-               
-         node.addEventListener('click',
-            function(){
-                node.innerText = i;
-                // node.classList.add("clicked-true");
-
-
-    //-caselle blu e rosse---------------------------------------------------------------------------------------------------------------------------------------- 
-                let bomb = false;
-
-                // controlla che la casella cliccata sia nella lista delle bombe
-                for( let i = 0; i <= bombList.length; i++){
-                    if (bombList[i] ===  node[i]){
-                        bomb = true;
-                    }
-
-                };
-
-                if(bomb == true ){
-                    node.classList.add("clicked-bomb");;
-                } else {
-                    node.classList.add("clicked-true");;
-                };
-    // -fine caselle blu e rosse-------------------------------------------------------------------------------------------------------------------------------------
-                
-
-            }
-        )
-            
-        gridContainer.appendChild(node);
-        
-        // display  none dei bottoni
-        var element = document.getElementById("header");
-        element.classList.add("button-none");
-            
-    }
+    
 };
 
-//--------------------------------------------------------------------------------------------------------------------------------------------
 
-// il computer deve generare 16 caselle casuali all'interno della griglia che rappresenteranno le bombe
 
 // i numeri corrisspondenti alle bombe dovranno essere inseriti in un array
 
 // se l'utente clicca su una bomba il gioco finisce e verranno visualizzate tutte le altre bombe
-
-
-// funzione per la generazione delle bombe
-// function genBomb(){
-
-
-
-
-// ----------------------------------------------------------------------------------------------------------------------------------------
-
-// let bomb = false;
-
-// // controlla che la casella cliccata sia nella lista delle bombe
-// for( let i = 0; i <= bombList.length; i++){
-//     if (bombList[i] === node[i]){
-//         bomb = true;
-//     }
-
-// };
-
-// if(bomb == true ){
-//     node.classList.add("clicked-bomb");;
-// } else {
-//     node.classList.add("clicked-true");;
-// };
