@@ -26,7 +26,6 @@ gamemModeEasy.addEventListener('click', function() {
     gamemode = 100;
     squareClass = "square-easy";
     genGrid();
-    genBomb();
     // display  none dei bottoni
      var element = document.getElementById("header");
      element.classList.add("button-none");
@@ -38,7 +37,6 @@ gamemModeMedium.addEventListener('click', function() {
     gamemode = 81;
     squareClass = "square-medium";
     genGrid();
-    genBomb();
     // display  none dei bottoni
     var element = document.getElementById("header");
     element.classList.add("button-none");
@@ -50,7 +48,6 @@ gamemModeHard.addEventListener('click', function() {
     gamemode = 49;
     squareClass = "square-hard";
     genGrid();
-    genBomb();
     // display  none dei bottoni
     var element = document.getElementById("header");
     element.classList.add("button-none");
@@ -61,14 +58,58 @@ gamemModeHard.addEventListener('click', function() {
 
 // funzione creazione griglia
 function genGrid(){
+    // -generazione bombe-----------------------------------------------------------------------------------------------------------------------------------
+    const bombList = [];
+
+    while (bombList.length <= 16) {
+    const num = Math.floor(Math.random() * gamemode) + 1;
+
+    let duplicateNum = true;
+
+    for (i = 0; i < bombList.length; i ++) {
+        if(num === bombList[i]){
+            duplicateNum = false;
+        }
+    }
+    if (duplicateNum == true){
+        bombList.push(num);
+    }
+}
+
+
+    console.log(bombList);
+    console.log("la lista delle bombe è: " + bombList);
+
+    // -fine generazione bombe-----------------------------------------------------------------------------------------------------------------------------------
     for(let i = 1; i <= gamemode; i++){
         let node = document.createElement("div");
         node.classList.add(squareClass);
+        
                
          node.addEventListener('click',
             function(){
                 node.innerText = i;
-                node.classList.add("clicked-true");
+                // node.classList.add("clicked-true");
+
+
+    //-caselle blu e rosse---------------------------------------------------------------------------------------------------------------------------------------- 
+                let bomb = false;
+
+                // controlla che la casella cliccata sia nella lista delle bombe
+                for( let i = 0; i <= bombList.length; i++){
+                    if (bombList[i] ===  node[i]){
+                        bomb = true;
+                    }
+
+                };
+
+                if(bomb == true ){
+                    node.classList.add("clicked-bomb");;
+                } else {
+                    node.classList.add("clicked-true");;
+                };
+    // -fine caselle blu e rosse-------------------------------------------------------------------------------------------------------------------------------------
+                
 
             }
         )
@@ -92,24 +133,25 @@ function genGrid(){
 
 
 // funzione per la generazione delle bombe
-function genBomb(){
-const bombList = [];
+// function genBomb(){
 
-while (bombList.length <= 16) {
-    const num = Math.floor(Math.random() * gamemode) + 1;
 
-    let duplicateNum = true;
 
-    for (i = 0; i < bombList.length; i ++) {
-        if(num === bombList[i]){
-            duplicateNum = false;
-        }
-    }
-    if (duplicateNum == true){
-        bombList.push(num);
-    }
-}
 
-console.log(bombList);
-console.log("la lista delle bombe è: " + bombList);
-}
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+// let bomb = false;
+
+// // controlla che la casella cliccata sia nella lista delle bombe
+// for( let i = 0; i <= bombList.length; i++){
+//     if (bombList[i] === node[i]){
+//         bomb = true;
+//     }
+
+// };
+
+// if(bomb == true ){
+//     node.classList.add("clicked-bomb");;
+// } else {
+//     node.classList.add("clicked-true");;
+// };

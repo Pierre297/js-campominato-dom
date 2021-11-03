@@ -76,6 +76,10 @@ header h4 {
   background: rgb(90 91 235);
 }
 
+.clicked-bomb {
+  background: red;
+}
+
 .container-grid {
   height: 500px;
 }
