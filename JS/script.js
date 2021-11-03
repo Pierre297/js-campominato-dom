@@ -61,17 +61,18 @@ function genGrid(){
     for(let i = 1; i <= gamemode; i++){
         let node = document.createElement("div");
         node.classList.add(squareClass);
-        // newElement.setAttribute("id", i);
+        node.setAttribute("id", i);
         
                
          node.addEventListener('click',
             function(){
                 node.innerText = i;
                 node.classList.add("clicked-true");
-                // let id = newElement.id;
-                // if(bombList.includes(id)){
-                // console.log('hai perso');
-                // }
+                let id = parseInt(node.id);
+                if(bombList.includes(id)){
+                    node.classList.add("clicked-bomb");
+                    console.log('hai perso');
+                }
                 
             }
         )
